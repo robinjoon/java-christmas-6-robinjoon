@@ -21,4 +21,11 @@ public class SelectedMenus {
                 .mapToInt(SelectedMenu::getTotalPrice)
                 .sum();
     }
+
+    public int getMenuCountThatMenuTypeEqual(MenuType menuType) {
+        return selectedMenus.stream()
+                .filter(selectedMenu -> selectedMenu.getMenuType() == menuType)
+                .mapToInt(SelectedMenu::getSelectedCount)
+                .sum();
+    }
 }
