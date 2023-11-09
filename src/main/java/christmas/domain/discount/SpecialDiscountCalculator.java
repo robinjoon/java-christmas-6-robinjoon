@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SpecialDiscountCalculator extends AbstractDiscountCalculator {
+class SpecialDiscountCalculator extends AbstractDiscountCalculator {
     private static final Set<LocalDate> specialDates = new HashSet<>();
 
     static {

@@ -3,7 +3,7 @@ package christmas.domain.discount;
 import christmas.domain.menu.SelectedMenus;
 import java.time.LocalDate;
 
-public abstract non-sealed class AbstractDiscountCalculator implements DiscountCalculator {
+abstract non-sealed class AbstractDiscountCalculator implements DiscountCalculator {
     @Override
     public final DiscountResult calculate(LocalDate selectedDate, SelectedMenus selectedMenus) {
         if (isDiscountAble(selectedMenus)) {
