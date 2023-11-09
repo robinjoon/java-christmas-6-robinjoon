@@ -15,4 +15,10 @@ public class SelectedMenus {
                 })
                 .toList();
     }
+
+    public int getTotalPrice() {
+        return selectedMenus.stream()
+                .mapToInt(SelectedMenu::getTotalPrice)
+                .sum();
+    }
 }
