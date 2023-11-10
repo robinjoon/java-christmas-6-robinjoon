@@ -1,5 +1,8 @@
 package christmas.input;
 
+import christmas.input.exception.DuplicateMenuNameException;
+import christmas.input.exception.UnableToSplitByBarException;
+import christmas.input.exception.UnableToSplitByCommaException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +15,7 @@ class InputManagerTest {
     @ValueSource(strings = {"aaa-1,bbb-2,", ",aaa-1,bbb-2", " aaa-1,bb-2", "aaa-1,bbb-2 "})
     void commaOrBlank(String input) {
         Assertions.assertThatThrownBy(() -> InputManager.getMenuNameToSelectedCountMap(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(UnableToSplitByCommaException.class);
     }
 
     @DisplayName("문장-수로 구분되지 않는게 있음")
@@ -20,7 +23,7 @@ class InputManagerTest {
     @ValueSource(strings = {"aaa-1,bbb", "aaa-1,bb-2,cc", "aaa-1,bb,cc-3,dd", "aaa-1,bb-aa,cc-3"})
     void withOutBar(String input) {
         Assertions.assertThatThrownBy(() -> InputManager.getMenuNameToSelectedCountMap(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(UnableToSplitByBarException.class);
     }
 
     @DisplayName("똑같은게 등장함")
@@ -28,6 +31,6 @@ class InputManagerTest {
     @ValueSource(strings = {"aaa-1,aaa-2"})
     void duplicate(String input) {
         Assertions.assertThatThrownBy(() -> InputManager.getMenuNameToSelectedCountMap(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(DuplicateMenuNameException.class);
     }
 }
