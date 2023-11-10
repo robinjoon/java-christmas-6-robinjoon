@@ -1,5 +1,7 @@
 package christmas.domain.menu;
 
+import christmas.exception.MenuSelectedCountOverflowException;
+import christmas.exception.OnlyBeverageSelectedException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -34,7 +36,7 @@ public class SelectedMenus {
     private void validateTotalMenuCount(final Map<String, Integer> menuNameToSelectedCount) {
         int totalMenuCount = calculateTotalMenuCount(menuNameToSelectedCount);
         if (totalMenuCount > 20) {
-            throw new IllegalArgumentException();
+            throw new MenuSelectedCountOverflowException();
         }
     }
 
@@ -45,7 +47,7 @@ public class SelectedMenus {
     private void validateBeverage(final Map<String, Integer> menuNameToSelectedCount) {
         boolean isOnlyBeverage = isOnlyBeverage(menuNameToSelectedCount);
         if (isOnlyBeverage) {
-            throw new IllegalArgumentException();
+            throw new OnlyBeverageSelectedException();
         }
     }
 

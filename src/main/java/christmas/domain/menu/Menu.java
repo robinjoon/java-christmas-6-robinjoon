@@ -5,6 +5,7 @@ import static christmas.domain.menu.MenuType.BEVERAGE;
 import static christmas.domain.menu.MenuType.DESSERT;
 import static christmas.domain.menu.MenuType.MAIN;
 
+import christmas.exception.NoSuchMenuException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ final class Menu {
         if (menuBoard.containsKey(menuName)) {
             return menuBoard.get(menuName);
         }
-        throw new IllegalArgumentException("없는 메뉴");
+        throw new NoSuchMenuException();
     }
 
     static void addMenu(String menuName, MenuType menuType, int price) {
