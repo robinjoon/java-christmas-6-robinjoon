@@ -11,6 +11,16 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 public class OutputManager {
+
+    public static void printStartMessage() {
+        System.out.print("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.\n"
+                + "12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)\n");
+    }
+
+    public static void printMenuInputGuide() {
+        System.out.print("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)\n");
+    }
+
     public static void print(Statistics statistics) {
         printDate(statistics);
         printMenu(statistics);
@@ -18,6 +28,7 @@ public class OutputManager {
         printGift(statistics);
         printBenefit(statistics);
         printTotalBenefitPrice(statistics);
+        printDiscountedTotalPrice(statistics);
         printBadge(statistics);
     }
 
@@ -46,31 +57,54 @@ public class OutputManager {
     private static void printGift(Statistics statistics) {
         System.out.print("\n<증정 메뉴>\n");
         GiftResults giftResults = statistics.giftResults();
-        if (giftResults.getTotalGiftPrice() == 0) {
+        if (isEmptyGift(giftResults)) {
             System.out.println("없음");
             return;
         }
         giftResults.giftResults().forEach(giftResult -> {
-            System.out.printf("%s %d개", giftResult.giftType().getName(), giftResult.giftCount());
+            System.out.printf("%s %d개\n", giftResult.giftType().getName(), giftResult.giftCount());
         });
+    }
+
+    private static boolean isEmptyGift(GiftResults giftResults) {
+        return giftResults.getTotalGiftPrice() == 0;
     }
 
     private static void printBenefit(Statistics statistics) {
         System.out.print("\n<혜택 내역>\n");
         GiftResults giftResults = statistics.giftResults();
         DiscountResults discountResults = statistics.discountResults();
-        if (giftResults.getTotalGiftPrice() == 0 && discountResults.getTotalDiscountPrice() == 0) {
+        if (isEmptyBenefit(giftResults, discountResults)) {
             System.out.println("없음");
             return;
         }
-        discountResults.discountResults().forEach(discountResult -> {
-            DiscountType discountType = discountResult.discountType();
-            System.out.printf("%s: %d\n", discountType.getDescription(), -discountResult.discountedPrice());
-        });
-        giftResults.giftResults().forEach(giftResult -> {
-            GiftType giftType = giftResult.giftType();
-            System.out.printf("%s: %d\n", giftType.name(), -giftResult.giftPrice());
-        });
+        printEachDiscountResult(discountResults);
+        printEachGiftResult(giftResults);
+    }
+
+    private static boolean isEmptyBenefit(GiftResults giftResults, DiscountResults discountResults) {
+        return giftResults.getTotalGiftPrice() == 0 && discountResults.getTotalDiscountPrice() == 0;
+    }
+
+    private static void printEachGiftResult(GiftResults giftResults) {
+        giftResults.giftResults().stream()
+                .filter(giftResult -> giftResult.giftPrice() != 0)
+                .forEach(giftResult -> {
+                    GiftType giftType = giftResult.giftType();
+                    DecimalFormat decimalFormat = new DecimalFormat("#,###");
+                    System.out.printf("%s: %s원\n", giftType.getName(), decimalFormat.format(-giftResult.giftPrice()));
+                });
+    }
+
+    private static void printEachDiscountResult(DiscountResults discountResults) {
+        discountResults.discountResults().stream()
+                .filter(discountResult -> discountResult.discountedPrice() != 0)
+                .forEach(discountResult -> {
+                    DiscountType discountType = discountResult.discountType();
+                    DecimalFormat decimalFormat = new DecimalFormat("#,###");
+                    System.out.printf("%s: %s원\n", discountType.getDescription(),
+                            decimalFormat.format(-discountResult.discountedPrice()));
+                });
     }
 
     private static void printTotalBenefitPrice(Statistics statistics) {
@@ -80,16 +114,16 @@ public class OutputManager {
         System.out.printf("%s원\n", decimalFormat.format(-totalBenefitPrice));
     }
 
-    private static void printBadge(Statistics statistics) {
-        System.out.print("\n<12월 이벤트 배지>\n");
-        Badge badge = statistics.badge();
-        System.out.printf(badge.getDescription());
-    }
-
     private static void printDiscountedTotalPrice(Statistics statistics) {
         System.out.print("\n<할인 후 예상 결제 금액>\n");
         int discountedTotalPrice = statistics.getDiscountedTotalPrice();
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
         System.out.printf("%s원\n", decimalFormat.format(discountedTotalPrice));
+    }
+
+    private static void printBadge(Statistics statistics) {
+        System.out.print("\n<12월 이벤트 배지>\n");
+        Badge badge = statistics.badge();
+        System.out.printf(badge.getDescription());
     }
 }
