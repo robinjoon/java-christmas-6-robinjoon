@@ -23,6 +23,7 @@ public class SelectedMenus {
     private void validate(final Map<String, Integer> menuNameToSelectedCount) {
         validateUnknownMenuName(menuNameToSelectedCount);
         validateTotalMenuCount(menuNameToSelectedCount);
+        validateBeverage(menuNameToSelectedCount);
     }
 
     private void validateUnknownMenuName(final Map<String, Integer> menuNameToSelectedCount) {
@@ -39,6 +40,19 @@ public class SelectedMenus {
 
     private static int calculateTotalMenuCount(Map<String, Integer> menuNameToSelectedCount) {
         return menuNameToSelectedCount.values().stream().mapToInt(value -> value).sum();
+    }
+
+    private void validateBeverage(final Map<String, Integer> menuNameToSelectedCount) {
+        boolean isOnlyBeverage = isOnlyBeverage(menuNameToSelectedCount);
+        if (isOnlyBeverage) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static boolean isOnlyBeverage(Map<String, Integer> menuNameToSelectedCount) {
+        return menuNameToSelectedCount.keySet().stream()
+                .map(Menu::from)
+                .allMatch(menu -> menu.getMenuType() == MenuType.BEVERAGE);
     }
 
     public int getTotalPrice() {

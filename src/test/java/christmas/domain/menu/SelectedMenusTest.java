@@ -23,4 +23,11 @@ class SelectedMenusTest {
         Assertions.assertThatThrownBy(() -> new SelectedMenus(Map.of("양송이수프", 21)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("오직 음료만")
+    @Test
+    void onlyBeverage() {
+        Assertions.assertThatThrownBy(() -> new SelectedMenus(Map.of("제로콜라", 1, "레드와인", 1, "샴페인", 1)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
