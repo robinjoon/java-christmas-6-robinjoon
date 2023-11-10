@@ -1,8 +1,8 @@
 package christmas.input;
 
-import christmas.input.exception.DuplicateMenuNameException;
-import christmas.input.exception.UnableToSplitByBarException;
-import christmas.input.exception.UnableToSplitByCommaException;
+import christmas.exception.DuplicateMenuNameException;
+import christmas.exception.UnableToSplitByBarException;
+import christmas.exception.UnableToSplitByCommaException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

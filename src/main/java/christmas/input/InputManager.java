@@ -1,9 +1,9 @@
 package christmas.input;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.input.exception.DuplicateMenuNameException;
-import christmas.input.exception.UnableToSplitByBarException;
-import christmas.input.exception.UnableToSplitByCommaException;
+import christmas.exception.DuplicateMenuNameException;
+import christmas.exception.UnableToSplitByBarException;
+import christmas.exception.UnableToSplitByCommaException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

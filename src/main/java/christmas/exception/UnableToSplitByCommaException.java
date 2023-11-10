@@ -1,4 +1,4 @@
-package christmas.input.exception;
+package christmas.exception;
 
 public class UnableToSplitByCommaException extends IllegalArgumentException {
     public UnableToSplitByCommaException() {
