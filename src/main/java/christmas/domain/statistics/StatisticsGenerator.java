@@ -30,7 +30,7 @@ public final class StatisticsGenerator {
         GiftResults giftResults = new GiftResults(calculateGiftResults(selectedMenus));
         Badge badge = badgeCalculator.calculate(discountResults, giftResults);
         SelectedMenusDTO selectedMenusDTO = selectedMenus.to();
-        return new Statistics(selectedMenusDTO, giftResults, discountResults, badge);
+        return new Statistics(selectedDate, selectedMenusDTO, giftResults, discountResults, badge);
     }
 
     private static List<GiftResult> calculateGiftResults(SelectedMenus selectedMenus) {

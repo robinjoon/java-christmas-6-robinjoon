@@ -5,8 +5,10 @@ import christmas.domain.discount.DiscountResults;
 import christmas.domain.gift.GiftResults;
 import christmas.domain.menu.SelectedMenuDTO;
 import christmas.domain.menu.SelectedMenusDTO;
+import java.time.LocalDate;
 
-public record Statistics(SelectedMenusDTO selectedMenusDTO, GiftResults giftResults, DiscountResults discountResults,
+public record Statistics(LocalDate selectedDate, SelectedMenusDTO selectedMenusDTO, GiftResults giftResults,
+                         DiscountResults discountResults,
                          Badge badge) {
 
     public int getTotalBenefitPrice() {
