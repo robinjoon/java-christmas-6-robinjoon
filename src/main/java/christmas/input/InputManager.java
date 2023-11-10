@@ -2,14 +2,34 @@ package christmas.input;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.exception.DuplicateMenuNameException;
+import christmas.exception.NoSuchDateException;
 import christmas.exception.UnableToSplitByBarException;
 import christmas.exception.UnableToSplitByCommaException;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
 public class InputManager {
+
+    public static LocalDate getDateFromConsole() {
+        String input = Console.readLine();
+        return getDate(input);
+    }
+
+    public static LocalDate getDate(String input) {
+        int day;
+        try {
+            day = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new NoSuchDateException();
+        }
+        if (day < 1 || day > 31) {
+            throw new NoSuchDateException();
+        }
+        return LocalDate.of(2023, 12, day);
+    }
 
     public static Map<String, Integer> getMenuNameToSelectedCountMapFromConsole() {
         String input = Console.readLine();

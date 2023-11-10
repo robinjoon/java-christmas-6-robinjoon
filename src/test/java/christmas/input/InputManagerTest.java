@@ -1,6 +1,7 @@
 package christmas.input;
 
 import christmas.exception.DuplicateMenuNameException;
+import christmas.exception.NoSuchDateException;
 import christmas.exception.UnableToSplitByBarException;
 import christmas.exception.UnableToSplitByCommaException;
 import org.assertj.core.api.Assertions;
@@ -26,11 +27,19 @@ class InputManagerTest {
                 .isInstanceOf(UnableToSplitByBarException.class);
     }
 
-    @DisplayName("똑같은게 등장함")
+    @DisplayName("똑같은메뉴가 등장함")
     @ParameterizedTest
     @ValueSource(strings = {"aaa-1,aaa-2"})
     void duplicate(String input) {
         Assertions.assertThatThrownBy(() -> InputManager.getMenuNameToSelectedCountMap(input))
                 .isInstanceOf(DuplicateMenuNameException.class);
+    }
+
+    @DisplayName("날짜 입력에 1 ~ 31 말고 다른 입력")
+    @ParameterizedTest
+    @ValueSource(strings = {"a", " ", "0", "32"})
+    void wrongDate(String input) {
+        Assertions.assertThatThrownBy(() -> InputManager.getDate(input))
+                .isInstanceOf(NoSuchDateException.class);
     }
 }
