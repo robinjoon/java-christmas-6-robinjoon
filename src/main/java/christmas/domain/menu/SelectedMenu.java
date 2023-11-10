@@ -9,10 +9,6 @@ class SelectedMenu {
         this.selectedCount = selectedCount;
     }
 
-    String getName() {
-        return menu.getName();
-    }
-
     int getSelectedCount() {
         return selectedCount;
     }
@@ -23,5 +19,9 @@ class SelectedMenu {
 
     MenuType getMenuType() {
         return menu.getMenuType();
+    }
+
+    SelectedMenuDTO to() {
+        return new SelectedMenuDTO(menu.getName(), menu.getPrice(), selectedCount);
     }
 }

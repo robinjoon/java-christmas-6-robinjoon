@@ -28,4 +28,11 @@ public class SelectedMenus {
                 .mapToInt(SelectedMenu::getSelectedCount)
                 .sum();
     }
+
+    public SelectedMenusDTO to() {
+        List<SelectedMenuDTO> selectedMenuDTOS = selectedMenus.stream()
+                .map(SelectedMenu::to)
+                .toList();
+        return new SelectedMenusDTO(selectedMenuDTOS);
+    }
 }
