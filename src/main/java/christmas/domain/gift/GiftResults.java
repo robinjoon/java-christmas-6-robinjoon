@@ -2,12 +2,7 @@ package christmas.domain.gift;
 
 import java.util.List;
 
-public class GiftResults {
-    private final List<GiftResult> giftResults;
-
-    public GiftResults(List<GiftResult> giftResults) {
-        this.giftResults = giftResults;
-    }
+public record GiftResults(List<GiftResult> giftResults) {
 
     public int getTotalGiftPrice() {
         return giftResults.stream()

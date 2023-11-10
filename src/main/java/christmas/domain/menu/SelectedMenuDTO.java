@@ -14,4 +14,12 @@ public final class SelectedMenuDTO {
     public int getTotalPrice() {
         return selectedCount * price;
     }
+
+    public int getSelectedCount() {
+        return selectedCount;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
