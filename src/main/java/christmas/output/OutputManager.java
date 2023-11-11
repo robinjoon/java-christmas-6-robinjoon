@@ -97,7 +97,7 @@ public class OutputManager {
     }
 
     private static void printEachDiscountResult(DiscountResults discountResults) {
-        discountResults.discountResults().stream()
+        discountResults.stream()
                 .filter(discountResult -> discountResult.discountedPrice() != 0)
                 .forEach(discountResult -> {
                     DiscountType discountType = discountResult.discountType();
