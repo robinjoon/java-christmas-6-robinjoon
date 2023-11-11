@@ -1,6 +1,5 @@
 package christmas.domain.eventplanner;
 
-import christmas.domain.badge.BadgeCalculator;
 import christmas.domain.menu.SelectedMenus;
 import christmas.domain.statistics.Statistics;
 import christmas.domain.statistics.StatisticsGenerator;
@@ -19,7 +18,6 @@ public final class EventPlanner {
     public void start() {
         LocalDate selectedDate = getSelectedDate();
         SelectedMenus selectedMenus = getSelectedMenus();
-        StatisticsGenerator statisticsGenerator = new StatisticsGenerator(new BadgeCalculator());
         Statistics statistics = statisticsGenerator.makeStatistics(selectedDate, selectedMenus);
         OutputManager.print(statistics);
     }
