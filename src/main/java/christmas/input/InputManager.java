@@ -72,6 +72,7 @@ public class InputManager {
         Map<String, Integer> result = new HashMap<>();
         for (int index = 0; index < barSplitInputs.size(); index = index + 2) {
             validateDuplicateMenuName(barSplitInputs, result, index);
+            validateSelectedCountStringContainPlus(barSplitInputs.get(index + 1));
             result.put(barSplitInputs.get(index), Integer.parseInt(barSplitInputs.get(index + 1)));
         }
         return result;
@@ -80,6 +81,12 @@ public class InputManager {
     private static void validateDuplicateMenuName(List<String> barSplitInputs, Map<String, Integer> result, int index) {
         if (result.containsKey(barSplitInputs.get(index))) {
             throw new DuplicateMenuNameException();
+        }
+    }
+
+    private static void validateSelectedCountStringContainPlus(String selectedCountString) {
+        if (selectedCountString.contains("+")) {
+            throw new NumberFormatException();
         }
     }
 }

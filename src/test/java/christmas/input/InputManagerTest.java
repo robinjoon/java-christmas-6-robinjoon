@@ -21,7 +21,7 @@ class InputManagerTest {
 
     @DisplayName("문장-수로 구분되지 않는게 있음")
     @ParameterizedTest
-    @ValueSource(strings = {"aaa-1,bbb", "aaa-1,bb-2,cc", "aaa-1,bb,cc-3,dd", "aaa-1,bb-aa,cc-3"})
+    @ValueSource(strings = {"aaa-1,bbb", "aaa-1,bb-2,cc", "aaa-1,bb,cc-3,dd", "aaa-1,bb-aa,cc-3", "aaa-+2"})
     void withOutBar(String input) {
         Assertions.assertThatThrownBy(() -> InputManager.getMenuNameToSelectedCountMap(input))
                 .isInstanceOf(UnableToSplitByBarException.class);
