@@ -61,7 +61,7 @@ public class OutputManager {
             System.out.println("없음");
             return;
         }
-        giftResults.giftResults().forEach(giftResult -> {
+        giftResults.forEach(giftResult -> {
             System.out.printf("%s %d개\n", giftResult.giftType().getName(), giftResult.giftCount());
         });
     }
@@ -87,7 +87,7 @@ public class OutputManager {
     }
 
     private static void printEachGiftResult(GiftResults giftResults) {
-        giftResults.giftResults().stream()
+        giftResults.stream()
                 .filter(giftResult -> giftResult.giftPrice() != 0)
                 .forEach(giftResult -> {
                     GiftType giftType = giftResult.giftType();
