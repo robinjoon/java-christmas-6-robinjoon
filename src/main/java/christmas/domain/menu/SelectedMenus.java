@@ -26,6 +26,7 @@ public class SelectedMenus {
         validateUnknownMenuName(menuNameToSelectedCount);
         validateTotalMenuCount(menuNameToSelectedCount);
         validateBeverage(menuNameToSelectedCount);
+        validateMenuCountIsPositive(menuNameToSelectedCount);
     }
 
     private void validateUnknownMenuName(final Map<String, Integer> menuNameToSelectedCount) {
@@ -55,6 +56,12 @@ public class SelectedMenus {
         return menuNameToSelectedCount.keySet().stream()
                 .map(Menu::from)
                 .allMatch(menu -> menu.getMenuType() == MenuType.BEVERAGE);
+    }
+
+    private void validateMenuCountIsPositive(Map<String, Integer> menuNameToSelectedCount) {
+        if (menuNameToSelectedCount.containsValue(0)) {
+            throw new MenuSelectedCountOverflowException();
+        }
     }
 
     public int getTotalPrice() {
