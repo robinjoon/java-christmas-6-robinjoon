@@ -9,8 +9,11 @@ import christmas.domain.menu.SelectedMenusDTO;
 import java.time.LocalDate;
 
 public final class StatisticsGenerator {
+    private StatisticsGenerator() {
 
-    public Statistics makeStatistics(LocalDate selectedDate, SelectedMenus selectedMenus) {
+    }
+
+    public static Statistics makeStatistics(LocalDate selectedDate, SelectedMenus selectedMenus) {
         DiscountResults discountResults = DiscountResults.calculatedFrom(selectedDate, selectedMenus);
         GiftResults giftResults = GiftResults.calculatedFrom(selectedMenus);
         Badge badge = BadgeCalculator.calculate(discountResults, giftResults);

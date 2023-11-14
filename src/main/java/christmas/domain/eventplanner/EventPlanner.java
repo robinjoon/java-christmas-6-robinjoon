@@ -9,16 +9,11 @@ import java.time.LocalDate;
 import java.util.Map;
 
 public final class EventPlanner {
-    private final StatisticsGenerator statisticsGenerator;
-
-    public EventPlanner(StatisticsGenerator statisticsGenerator) {
-        this.statisticsGenerator = statisticsGenerator;
-    }
 
     public void start() {
         LocalDate selectedDate = getSelectedDate();
         SelectedMenus selectedMenus = getSelectedMenus();
-        Statistics statistics = statisticsGenerator.makeStatistics(selectedDate, selectedMenus);
+        Statistics statistics = StatisticsGenerator.makeStatistics(selectedDate, selectedMenus);
         OutputManager.print(statistics);
     }
 
