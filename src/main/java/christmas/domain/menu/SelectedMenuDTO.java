@@ -5,7 +5,7 @@ public final class SelectedMenuDTO {
     private final int price;
     private final int selectedCount;
 
-    public SelectedMenuDTO(String name, int price, int selectedCount) {
+    SelectedMenuDTO(String name, int price, int selectedCount) {
         this.name = name;
         this.price = price;
         this.selectedCount = selectedCount;
