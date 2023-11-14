@@ -18,7 +18,7 @@ public class SelectedMenus {
     }
 
     private static SelectedMenu selectMenu(Map<String, Integer> menuNameToSelectedCount, String menuName) {
-        Menu menu = Menu.from(menuName);
+        Menu menu = MenuBoard.getMenu(menuName);
         return new SelectedMenu(menu, menuNameToSelectedCount.get(menuName));
     }
 
@@ -31,7 +31,7 @@ public class SelectedMenus {
 
     private void validateUnknownMenuName(final Map<String, Integer> menuNameToSelectedCount) {
         Set<String> menuNames = menuNameToSelectedCount.keySet();
-        menuNames.forEach(Menu::from);
+        menuNames.forEach(MenuBoard::getMenu);
     }
 
     private void validateTotalMenuCount(final Map<String, Integer> menuNameToSelectedCount) {
@@ -54,7 +54,7 @@ public class SelectedMenus {
 
     private static boolean isOnlyBeverage(Map<String, Integer> menuNameToSelectedCount) {
         return menuNameToSelectedCount.keySet().stream()
-                .map(Menu::from)
+                .map(MenuBoard::getMenu)
                 .allMatch(menu -> menu.getMenuType() == MenuType.BEVERAGE);
     }
 
