@@ -10,30 +10,34 @@ import java.util.Map;
 
 public final class EventPlanner {
 
-    public void start() {
+    private EventPlanner() {
+
+    }
+
+    public static void start() {
         LocalDate selectedDate = getSelectedDate();
         SelectedMenus selectedMenus = getSelectedMenus();
         Statistics statistics = StatisticsGenerator.makeStatistics(selectedDate, selectedMenus);
         OutputManager.print(statistics);
     }
 
-    private SelectedMenus getSelectedMenus() {
+    private static SelectedMenus getSelectedMenus() {
         RetryHelper<SelectedMenus> selectedMenusretryHelper = new RetryHelper<>();
-        return selectedMenusretryHelper.retry(this::getSelectedMenusOnce);
+        return selectedMenusretryHelper.retry(EventPlanner::getSelectedMenusOnce);
     }
 
-    private SelectedMenus getSelectedMenusOnce() {
+    private static SelectedMenus getSelectedMenusOnce() {
         OutputManager.printMenuInputGuide();
         Map<String, Integer> menuNameToSelectedCount = InputManager.getMenuNameToSelectedCountMapFromConsole();
         return new SelectedMenus(menuNameToSelectedCount);
     }
 
-    private LocalDate getSelectedDate() {
+    private static LocalDate getSelectedDate() {
         RetryHelper<LocalDate> localDateRetryHelper = new RetryHelper<>();
-        return localDateRetryHelper.retry(this::getLocalDateOnce);
+        return localDateRetryHelper.retry(EventPlanner::getLocalDateOnce);
     }
 
-    private LocalDate getLocalDateOnce() {
+    private static LocalDate getLocalDateOnce() {
         OutputManager.printStartMessage();
         return InputManager.getDateFromConsole();
     }
