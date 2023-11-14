@@ -1,7 +1,9 @@
 package christmas.domain.gift;
 
+import static christmas.exception.PolicyViolationType.NO_SUCH_MENU;
+
 import christmas.domain.menu.MenuBoard;
-import christmas.exception.NoSuchMenuException;
+import christmas.exception.PolicyViolationException;
 
 public enum GiftType {
     OVER_120000("샴페인", 25_000);
@@ -17,7 +19,7 @@ public enum GiftType {
 
     private static void validateMenu(String name, int price) {
         if (MenuBoard.getMenuPrice(name) != price) {
-            throw new NoSuchMenuException();
+            throw new PolicyViolationException(NO_SUCH_MENU);
         }
     }
 

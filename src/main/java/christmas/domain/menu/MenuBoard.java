@@ -4,8 +4,9 @@ import static christmas.domain.menu.MenuType.APPETIZER;
 import static christmas.domain.menu.MenuType.BEVERAGE;
 import static christmas.domain.menu.MenuType.DESSERT;
 import static christmas.domain.menu.MenuType.MAIN;
+import static christmas.exception.PolicyViolationType.NO_SUCH_MENU;
 
-import christmas.exception.NoSuchMenuException;
+import christmas.exception.PolicyViolationException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public final class MenuBoard {
         if (menuBoard.containsKey(menuName)) {
             return menuBoard.get(menuName);
         }
-        throw new NoSuchMenuException();
+        throw new PolicyViolationException(NO_SUCH_MENU);
     }
 
     private static void initBoard() {

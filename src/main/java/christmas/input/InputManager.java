@@ -1,10 +1,12 @@
 package christmas.input;
 
+import static christmas.exception.PolicyViolationType.DUPLICATE_MENU_NAME;
+import static christmas.exception.PolicyViolationType.NO_SUCH_DATE;
+import static christmas.exception.PolicyViolationType.UNABLE_TO_SPLIT_BAR;
+import static christmas.exception.PolicyViolationType.UNABLE_TO_SPLIT_COMMA;
+
 import camp.nextstep.edu.missionutils.Console;
-import christmas.exception.DuplicateMenuNameException;
-import christmas.exception.NoSuchDateException;
-import christmas.exception.UnableToSplitByBarException;
-import christmas.exception.UnableToSplitByCommaException;
+import christmas.exception.PolicyViolationException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -23,10 +25,10 @@ public final class InputManager {
         try {
             day = Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new NoSuchDateException();
+            throw new PolicyViolationException(NO_SUCH_DATE);
         }
         if (day < 1 || day > 31) {
-            throw new NoSuchDateException();
+            throw new PolicyViolationException(NO_SUCH_DATE);
         }
         return LocalDate.of(2023, 12, day);
     }
@@ -44,7 +46,7 @@ public final class InputManager {
         try {
             return makeMenuNameToSelectedCountMap(barSplitInputs);
         } catch (NumberFormatException e) {
-            throw new UnableToSplitByBarException();
+            throw new PolicyViolationException(UNABLE_TO_SPLIT_BAR);
         }
     }
 
@@ -53,7 +55,7 @@ public final class InputManager {
             StringSplitter commaSplitter = new StringSplitter(',');
             return commaSplitter.split(input);
         } catch (IllegalArgumentException e) {
-            throw new UnableToSplitByCommaException();
+            throw new PolicyViolationException(UNABLE_TO_SPLIT_COMMA);
         }
     }
 
@@ -64,10 +66,10 @@ public final class InputManager {
 
     private static Map<String, Integer> makeMenuNameToSelectedCountMap(List<String> barSplitInputs) {
         if (barSplitInputs.size() <= 1) {
-            throw new UnableToSplitByBarException();
+            throw new PolicyViolationException(UNABLE_TO_SPLIT_BAR);
         }
         if (barSplitInputs.size() % 2 == 1) {
-            throw new UnableToSplitByBarException();
+            throw new PolicyViolationException(UNABLE_TO_SPLIT_BAR);
         }
         Map<String, Integer> result = new HashMap<>();
         for (int index = 0; index < barSplitInputs.size(); index = index + 2) {
@@ -80,7 +82,7 @@ public final class InputManager {
 
     private static void validateDuplicateMenuName(List<String> barSplitInputs, Map<String, Integer> result, int index) {
         if (result.containsKey(barSplitInputs.get(index))) {
-            throw new DuplicateMenuNameException();
+            throw new PolicyViolationException(DUPLICATE_MENU_NAME);
         }
     }
 
