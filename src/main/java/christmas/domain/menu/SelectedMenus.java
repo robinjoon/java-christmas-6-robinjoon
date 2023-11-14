@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class SelectedMenus {
+public final class SelectedMenus {
     private final List<SelectedMenu> selectedMenus;
 
     public SelectedMenus(final Map<String, Integer> menuNameToSelectedCount) {

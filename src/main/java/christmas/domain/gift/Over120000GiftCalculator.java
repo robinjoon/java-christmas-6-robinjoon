@@ -4,7 +4,7 @@ import static christmas.domain.gift.GiftType.OVER_120000;
 
 import christmas.domain.menu.SelectedMenus;
 
-class Over120000GiftCalculator extends AbstractGiftCalculator {
+final class Over120000GiftCalculator extends AbstractGiftCalculator {
     @Override
     GiftResult calculateGift(SelectedMenus selectedMenus) {
         if (selectedMenus.getTotalPrice() >= 120_000) {

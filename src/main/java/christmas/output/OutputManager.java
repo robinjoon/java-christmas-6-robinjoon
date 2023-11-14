@@ -10,7 +10,7 @@ import christmas.domain.statistics.Statistics;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 
-public class OutputManager {
+public final class OutputManager {
 
     public static void printStartMessage() {
         System.out.print("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.\n"

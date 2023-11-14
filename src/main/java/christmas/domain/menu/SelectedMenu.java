@@ -1,6 +1,6 @@
 package christmas.domain.menu;
 
-class SelectedMenu {
+final class SelectedMenu {
     private final Menu menu;
     private final int selectedCount;
 

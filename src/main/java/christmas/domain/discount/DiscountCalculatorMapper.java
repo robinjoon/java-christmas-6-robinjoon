@@ -7,7 +7,7 @@ import static christmas.domain.discount.DiscountType.XMAS;
 
 import java.util.Optional;
 
-public class DiscountCalculatorMapper {
+public final class DiscountCalculatorMapper {
     public static Optional<DiscountCalculator> map(DiscountType discountType) {
         if (discountType == SPECIAL) {
             return Optional.of(new SpecialDiscountCalculator());

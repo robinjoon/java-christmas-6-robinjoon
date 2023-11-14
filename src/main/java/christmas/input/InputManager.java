@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class InputManager {
+public final class InputManager {
 
     public static LocalDate getDateFromConsole() {
         String input = Console.readLine();

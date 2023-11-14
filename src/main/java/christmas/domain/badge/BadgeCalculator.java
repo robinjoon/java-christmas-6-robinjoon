@@ -8,7 +8,7 @@ import static christmas.domain.badge.Badge.TREE;
 import christmas.domain.discount.DiscountResults;
 import christmas.domain.gift.GiftResults;
 
-public class BadgeCalculator {
+public final class BadgeCalculator {
     public Badge calculate(DiscountResults discountResults, GiftResults giftResults) {
         int benefitPrice = discountResults.getTotalDiscountPrice() + giftResults.getTotalGiftPrice();
         if (benefitPrice >= 20_000) {

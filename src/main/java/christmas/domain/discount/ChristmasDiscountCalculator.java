@@ -4,7 +4,7 @@ import christmas.domain.menu.SelectedMenus;
 import java.time.LocalDate;
 import java.time.Period;
 
-class ChristmasDiscountCalculator extends AbstractDiscountCalculator {
+final class ChristmasDiscountCalculator extends AbstractDiscountCalculator {
     @Override
     DiscountResult calculateDiscount(LocalDate selectedDate, SelectedMenus selectedMenus) {
         if (isBeforeDecember2023(selectedDate)) {
