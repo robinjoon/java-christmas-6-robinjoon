@@ -2,7 +2,6 @@ package christmas.domain.statistics;
 
 import static christmas.domain.badge.Badge.SANTA;
 
-import christmas.domain.badge.BadgeCalculator;
 import christmas.domain.menu.SelectedMenus;
 import java.time.LocalDate;
 import java.util.Map;
@@ -15,7 +14,7 @@ class StatisticsGeneratorTest {
     @DisplayName("정상 테스트")
     @Test
     void makeStatistics() {
-        StatisticsGenerator statisticsGenerator = new StatisticsGenerator(new BadgeCalculator());
+        StatisticsGenerator statisticsGenerator = new StatisticsGenerator();
         SelectedMenus selectedMenus = new SelectedMenus(
                 Map.of("티본스테이크", 1, "바비큐립", 1, "초코케이크", 2, "제로콜라", 1)
         );

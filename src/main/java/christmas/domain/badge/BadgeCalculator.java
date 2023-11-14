@@ -9,7 +9,10 @@ import christmas.domain.discount.DiscountResults;
 import christmas.domain.gift.GiftResults;
 
 public final class BadgeCalculator {
-    public Badge calculate(DiscountResults discountResults, GiftResults giftResults) {
+    private BadgeCalculator() {
+    }
+
+    public static Badge calculate(DiscountResults discountResults, GiftResults giftResults) {
         int benefitPrice = discountResults.getTotalDiscountPrice() + giftResults.getTotalGiftPrice();
         if (benefitPrice >= 20_000) {
             return SANTA;

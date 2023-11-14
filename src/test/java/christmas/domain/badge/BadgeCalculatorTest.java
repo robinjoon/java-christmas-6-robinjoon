@@ -51,8 +51,7 @@ class BadgeCalculatorTest {
     @ParameterizedTest
     @MethodSource("calculateParameter")
     void calculate(DiscountResults discountResults, GiftResults giftResults, Badge expected) {
-        BadgeCalculator badgeCalculator = new BadgeCalculator();
-        Badge calculated = badgeCalculator.calculate(discountResults, giftResults);
+        Badge calculated = BadgeCalculator.calculate(discountResults, giftResults);
         Assertions.assertThat(calculated).isEqualTo(expected);
     }
 }
